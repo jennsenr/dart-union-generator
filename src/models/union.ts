@@ -11,7 +11,7 @@ export default class Union {
   }
 
   private static findUnionCases(input: string): UnionCase[] {
-    const unionCaseRegex = /factory\s(.*)=>\s*(.*);/g
+    const unionCaseRegex = /factory\s(.*)=>?\s*(.*);/g
     let matches = input.match(unionCaseRegex)
   
     if (matches == null || matches.length < 1) {

@@ -7,7 +7,7 @@ class Union {
         this.cases = cases;
     }
     static findUnionCases(input) {
-        const unionCaseRegex = /factory\s(.*)=>\s*(.*);/g;
+        const unionCaseRegex = /factory\s(.*)=>?\s*(.*);/g;
         let matches = input.match(unionCaseRegex);
         if (matches == null || matches.length < 1) {
             return [];

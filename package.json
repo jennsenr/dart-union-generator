@@ -1,0 +1,44 @@
+{
+  "name": "dart-union-generator",
+  "version": "0.0.1",
+  "description": "Easily generate Union classes that implement the when and map methods",
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/jennsenr/dart-union-generator"
+	},
+  "main": "./out/extension.js",
+  "engines": {
+    "vscode": "^1.51.0"
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint . --ext .ts,.tsx",
+    "watch": "tsc -watch -p ./"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:dart"
+  ],
+  "keywords": [
+    "vscode",
+    "dart",
+    "union",
+    "extension",
+    "generator"
+  ],
+  "icon": "assets/icon.png",
+  "author": "Jennsen Ramos",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^12.12.0",
+    "@types/vscode": "^1.32.0",
+    "@typescript-eslint/eslint-plugin": "^4.16.0",
+    "@typescript-eslint/parser": "^4.16.0",
+    "eslint": "^7.21.0",
+    "typescript": "^4.2.2"
+  }
+}

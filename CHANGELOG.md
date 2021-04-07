@@ -1,3 +1,6 @@
+## 0.0.4
+
+HOTFIX.
 ## 0.0.3
 
 Added new syntax like freezed unions.

@@ -1,7 +1,7 @@
 {
   "name": "dart-union-generator",
   "displayName": "Dart Union Class Generator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Easily generate Union classes that implement the when and map methods",
   "repository": {
 		"type": "git",
@@ -26,10 +26,13 @@
   ],
   "keywords": [
     "vscode",
+    "flutter",
     "dart",
     "union",
     "extension",
-    "generator"
+    "generator",
+    "sealed",
+    "failure"
   ],
   "icon": "assets/icon.png",
   "author": "Jennsen Ramos",

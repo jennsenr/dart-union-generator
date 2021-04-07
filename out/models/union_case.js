@@ -8,19 +8,18 @@ class UnionCase {
         this.args = args;
     }
     static fromMatchString(matchString) {
-        var _a;
         const caseNameRegex = /(?<=(=>?\s*))[A-Z][a-zA-Z1-9]*(?=((\(\))?;))/;
         const factoryNameRegex = /(?<=(factory\s(.*)\.)).*(?=(\(.*\)\s*=>?))/;
         const argsRegex = /(?<=(\()).*(?=(\)\s*=>?))/;
         const matchCaseName = matchString.match(caseNameRegex);
         const matchFactoryName = matchString.match(factoryNameRegex);
-        const matchArgs = (_a = matchString.match(argsRegex)) !== null && _a !== void 0 ? _a : [];
+        const matchArgs = matchString.match(argsRegex);
         if (matchCaseName == null || matchFactoryName == null) {
             return null;
         }
         const caseName = matchCaseName[0];
         const factoryName = matchFactoryName[0];
-        const args = matchArgs[0].length < 1 ? [] : matchArgs[0].split(',').map((e) => argument_1.default.fromString(e));
+        const args = matchArgs != null ? matchArgs[0].split(',').map((e) => argument_1.default.fromString(e)) : [];
         return new UnionCase(caseName, factoryName, args);
     }
     toFactoryDartCode(className) {
@@ -66,7 +65,7 @@ class ${this.name} extends ${className} {
     ${properties}
 
     ${classConstructor}
-  }`;
+}`;
         return dartCode;
     }
 }

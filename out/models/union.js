@@ -23,7 +23,7 @@ class Union {
         return unionCases;
     }
     static fromString(input) {
-        const classNameRegex = /(?<=(class\s))([a-zA-Z][a-zA-Z0-9]*)/;
+        const classNameRegex = /(?<=(class\s))([A-Z][a-zA-Z0-9]*)/;
         const match = input.match(classNameRegex);
         if (match == null) {
             return null;

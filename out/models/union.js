@@ -9,7 +9,7 @@ class Union {
     static findUnionCases(input) {
         const unionCaseRegex = /factory\s(.*)=>?\s*(.*);/g;
         let matches = input.match(unionCaseRegex);
-        if (matches == null || matches.length < 1) {
+        if (matches == null) {
             return [];
         }
         let unionCases = [];
@@ -23,7 +23,7 @@ class Union {
         return unionCases;
     }
     static fromString(input) {
-        const classNameRegex = /(?<=(class\s)).*(?=(\s\{))/;
+        const classNameRegex = /(?<=(class\s))([a-zA-Z][a-zA-Z0-9]*)/;
         const match = input.match(classNameRegex);
         if (match == null) {
             return null;

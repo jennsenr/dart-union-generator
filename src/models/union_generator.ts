@@ -43,4 +43,6 @@ export class UnionGenerator implements vscode.CodeActionProvider {
     return fix
   }
 
+  
+
 }

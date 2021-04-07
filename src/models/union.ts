@@ -1,4 +1,3 @@
-import { toLowerFirstCase } from "../utils/string_extension";
 import UnionCase from "./union_case";
 
 export default class Union {
@@ -14,7 +13,7 @@ export default class Union {
     const unionCaseRegex = /factory\s(.*)=>?\s*(.*);/g
     let matches = input.match(unionCaseRegex)
   
-    if (matches == null || matches.length < 1) {
+    if (matches == null) {
       return []
     }
   
@@ -34,7 +33,7 @@ export default class Union {
   }
   
    static fromString(input: string) : Union | null {
-    const classNameRegex = /(?<=(class\s)).*(?=(\s\{))/
+    const classNameRegex = /(?<=(class\s))([A-Z][a-zA-Z0-9]*)/
   
     const match = input.match(classNameRegex)
   

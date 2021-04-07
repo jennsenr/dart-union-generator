@@ -9,9 +9,9 @@ class UnionCase {
     }
     static fromMatchString(matchString) {
         var _a;
-        const caseNameRegex = /(?<=(=>\s)).*(?=(\(\);))/;
-        const factoryNameRegex = /(?<=(factory\s(.*)\.)).*(?=(\(.*\)\s=>))/;
-        const argsRegex = /(?<=(\()).*(?=(\)\s=>))/;
+        const caseNameRegex = /(?<=(=>?\s*))[A-Z][a-zA-Z1-9]*(?=((\(\))?;))/;
+        const factoryNameRegex = /(?<=(factory\s(.*)\.)).*(?=(\(.*\)\s*=>?))/;
+        const argsRegex = /(?<=(\()).*(?=(\)\s*=>?))/;
         const matchCaseName = matchString.match(caseNameRegex);
         const matchFactoryName = matchString.match(factoryNameRegex);
         const matchArgs = (_a = matchString.match(argsRegex)) !== null && _a !== void 0 ? _a : [];
@@ -25,8 +25,7 @@ class UnionCase {
     }
     toFactoryDartCode(className) {
         const args = this.args.map((e) => e.toDartCode()).join(', ');
-        const variables = this.args.map((e) => e.toVariableDartCode()).join(', ');
-        const dartCode = `factory ${className}.${this.factoryName}(${args}) => ${this.name}(${variables});`;
+        const dartCode = `factory ${className}.${this.factoryName}(${args}) = ${this.name};`;
         return dartCode;
     }
     toWhenArgDartCode() {
@@ -54,7 +53,8 @@ class UnionCase {
         return dartCode;
     }
     toClassDartCode(className) {
-        if (this.args.length < 1) {
+        const notHasArgs = this.args.length < 1;
+        if (notHasArgs) {
             const dartCode = `class ${this.name} extends ${className} {}`;
             return dartCode;
         }

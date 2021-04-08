@@ -1,3 +1,9 @@
+## 0.0.5
+
+Added documentation.
+Added support for private classes.
+Added support for trailing comma.
+Added fromString and toString methods.
 ## 0.0.4
 
 HOTFIX.

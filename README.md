@@ -42,13 +42,6 @@ Here we'll describe some cases where you could have some troubles trying to use 
 First of all, as it's on a very early stage, some cases are not (yet) supported:
 
 - **Dart version < 2.12.0**. You'll need to upgrade to (at least) dart version _2.12.0_ so you can use this extension.
-- Private class names. For example, `NameForFirstUseCaseClass` should work properly while `_NameForFirstUseCaseClass` is not supported yet.
-- Trailling commas in factory arguments. Example:
-
-```dart
-factory YourClassName.secondUseCase(String arg1, int arg2, bool arg 3) = SecondUseCase; //supported
-factory YourClassName.secondUseCase(String arg1, int arg2, bool arg 3,) = SecondUseCase; //not supported
-```
 
 # Support
 

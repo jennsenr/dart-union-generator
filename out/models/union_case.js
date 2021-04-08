@@ -8,9 +8,10 @@ class UnionCase {
         this.args = args;
     }
     static fromMatchString(matchString) {
-        const caseNameRegex = /(?<=(=>?\s*))[A-Z][a-zA-Z1-9]*(?=((\(\))?;))/;
+        const caseNameRegex = /(?<=(=>?\s*))[_A-Z][a-zA-Z1-9]*(?=((\(\))?;))/;
         const factoryNameRegex = /(?<=(factory\s(.*)\.)).*(?=(\(.*\)\s*=>?))/;
         const argsRegex = /(?<=(\()).*(?=(\)\s*=>?))/;
+        const argFilterRegex = /[_a-zA-Z][a-zA-Z0-9]*\s[a-zA-Z][a-zA-Z0-9]*/;
         const matchCaseName = matchString.match(caseNameRegex);
         const matchFactoryName = matchString.match(factoryNameRegex);
         const matchArgs = matchString.match(argsRegex);
@@ -19,7 +20,7 @@ class UnionCase {
         }
         const caseName = matchCaseName[0];
         const factoryName = matchFactoryName[0];
-        const args = matchArgs != null && matchArgs[0].length > 0 ? matchArgs[0].split(',').map((e) => argument_1.default.fromString(e)) : [];
+        const args = matchArgs != null && matchArgs[0].length > 0 ? matchArgs[0].split(',').filter((e) => e.length > 0 && e.match(argFilterRegex)).map((e) => argument_1.default.fromString(e)) : [];
         return new UnionCase(caseName, factoryName, args);
     }
     toFactoryDartCode(className) {

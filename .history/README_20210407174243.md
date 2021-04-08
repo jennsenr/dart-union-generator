@@ -1,0 +1,1 @@
+![syntax](assets/dart_union_generator.gif)

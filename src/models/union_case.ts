@@ -1,6 +1,8 @@
 import Argument from "./argument"
 
 export default class UnionCase {
+ 
+ 
   
   name: string
   factoryName: string
@@ -48,6 +50,12 @@ export default class UnionCase {
   }
 
   toWhenIsDartCode(): string {
+    const hasArgs = this.args.length > 0
+
+    if (hasArgs) {
+      return '';
+    }
+
     const dartCode = `
     if (this is ${this.name}) {
       ${this.factoryName}.call(this as ${this.name});
@@ -57,12 +65,30 @@ export default class UnionCase {
     return dartCode;
   }
 
+  toFromStringDartCode(className: string): string {
+    const dartCode = `
+    if (value == '${this.factoryName}') {
+      return ${className}.${this.factoryName}();
+    }
+`
+    return dartCode;
+  }
+
+  toToStringDartCode(): string {
+    const dartCode = `
+    if (this is ${this.name}) {
+      return '${this.factoryName}';
+    }
+`
+    return dartCode;
+  }
+
   toMapArgDartCode(): string {
     const dartCode = `required R Function(${this.name}) ${this.factoryName},`
 
     return dartCode;
   }
-
+  
   toMapIsDartCode(): string {
     const dartCode = `
     if (this is ${this.name}) {

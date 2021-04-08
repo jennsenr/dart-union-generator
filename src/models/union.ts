@@ -79,6 +79,36 @@ ${mapIs}
 
     return dartCode
   }
+
+  toFromStringDartCode(): string {
+    const fromStringFactories = this.cases.filter((e) => e.args.length == 0).map((e) => e.toFromStringDartCode(this.name)).join('\n')
+    const isDefault = `return ${this.name}.${this.cases[0].factoryName}();`
+    const dartCode = `
+   factory ${this.name}.fromString(String value) {
+    ${fromStringFactories}
+
+    ${isDefault}
+   }
+`
+
+    return dartCode
+  }
+
+  toToStringDartCode(): string {
+    const toStringCases = this.cases.map((e) => e.toToStringDartCode()).join('\n')
+    const isDefault = `return '${this.cases[0].factoryName}';`
+    const dartCode = `
+    @override
+   String toString() {
+    ${toStringCases}
+
+    ${isDefault}
+   }
+`
+
+    return dartCode
+  }
+  
   
 
 
@@ -93,6 +123,8 @@ abstract class ${this.name} {
   ${factories}
   ${this.toWhenDartCode()}
   ${this.toMapDartCode()}
+  ${this.toFromStringDartCode()}
+  ${this.toToStringDartCode()}
   }
 
 ${classes}

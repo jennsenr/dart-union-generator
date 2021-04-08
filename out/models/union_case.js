@@ -33,9 +33,29 @@ class UnionCase {
         return dartCode;
     }
     toWhenIsDartCode() {
+        const hasArgs = this.args.length > 0;
+        if (hasArgs) {
+            return '';
+        }
         const dartCode = `
     if (this is ${this.name}) {
       ${this.factoryName}.call(this as ${this.name});
+    }
+`;
+        return dartCode;
+    }
+    toFromStringDartCode(className) {
+        const dartCode = `
+    if (value == '${this.factoryName}') {
+      return ${className}.${this.factoryName}();
+    }
+`;
+        return dartCode;
+    }
+    toToStringDartCode() {
+        const dartCode = `
+    if (this is ${this.name}) {
+      return '${this.factoryName}';
     }
 `;
         return dartCode;

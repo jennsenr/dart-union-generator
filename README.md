@@ -2,17 +2,17 @@
 
 ## What inspired us?
 
-We've been really happy using [freezed](https://pub.dev/packages/freezed) package tool to create our **union** classes, which have given us the possibility of having a better solution than common _enums_, provinding methods like **map**, **when**, **maybeMap** and **maybeWhen** that allowed us to avoid omissions when working with different possible enumerated values for an instance.
+We've been really happy using [freezed](https://pub.dev/packages/freezed) package tool to create our **union** classes, which have given us the possibility of having a better solution than common _enums_, providing methods like **map**, **when**, **maybeMap** and **maybeWhen** that allowed us to avoid omissions when working with different possible enumerated values for an instance.
 
 So, what's the problem? Well... Freezed package creates auto-generated code and this, of course, makes stuff to be impossible to control, while adds some extra dependencies that we wanted to avoid at all.
 
-Now, we're going to explain how to use the extension, so you can have full control on your code while having all the advantajes that **unions** give us.
+Now, we're going to explain how to use the extension, so you can have full control on your code while easily having all the advantajes that **unions** give us.
 
 ![syntax](assets/demonstration.gif)
 
 ## Usage
 
-This extensions works by creating a _template_ class that will helps us know what to generate next. The expected structure is as follows:
+This extension works by creating a _template_ class that will help us know what to generate next. The expected structure is as follows:
 
 ```dart
 class YourClassName{
@@ -27,6 +27,9 @@ This example will generate a type **YourClassName** which can be of any of these
 **NameForFirstUseCaseClass** || **NameForSecondUseCaseClass** || **NameForThirdUseCaseClass**
 
 Also, this will provide you the handy methods **map**, **when**, **maybeMap** and **maybeWhen**.
+
+To activate generation you must place the cursor in the class declaration line, and press *cntrl (cmd) + .*
+
 
 ## Why would I use _Unions_?
 

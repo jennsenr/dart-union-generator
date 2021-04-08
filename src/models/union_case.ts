@@ -13,7 +13,7 @@ export default class UnionCase {
   }
 
   static fromMatchString(matchString: string): UnionCase | null {
-    const caseNameRegex = /(?<=(=>?\s*))[A-Z][a-zA-Z1-9]*(?=((\(\))?;))/
+    const caseNameRegex = /(?<=(=>?\s*))[_A-Z][a-zA-Z1-9]*(?=((\(\))?;))/
     const factoryNameRegex = /(?<=(factory\s(.*)\.)).*(?=(\(.*\)\s*=>?))/
     const argsRegex = /(?<=(\()).*(?=(\)\s*=>?))/
 

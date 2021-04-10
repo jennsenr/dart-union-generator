@@ -46,6 +46,38 @@ ${whenIs}
 `;
         return dartCode;
     }
+    toMaybeWhenDartCode() {
+        const maybeWhenArgs = this.cases.map((e) => e.toMaybeWhenArgDartCode()).join('\n    ');
+        const whenIs = this.cases.map((e) => e.toMaybeWhenIsDartCode()).join('\n');
+        const orElseArg = `required void Function() orElse,`;
+        const orElse = `orElse.call();`;
+        const dartCode = `
+  void maybeWhen({
+    ${maybeWhenArgs}
+    ${orElseArg}
+  }) {
+${whenIs}
+    ${orElse}
+  }
+`;
+        return dartCode;
+    }
+    toMaybeMapDartCode() {
+        const maybeMapArgs = this.cases.map((e) => e.toMaybeMapArgDartCode()).join('\n    ');
+        const mapIs = this.cases.map((e) => e.toMaybeMapIsDartCode()).join('\n');
+        const orElseArg = `required R Function() orElse,`;
+        const orElse = `return orElse.call();`;
+        const dartCode = `
+  R maybeMap<R>({
+    ${maybeMapArgs}
+    ${orElseArg}
+  }) {
+${mapIs}
+    ${orElse}
+  }
+`;
+        return dartCode;
+    }
     toMapDartCode() {
         const mapArgs = this.cases.map((e) => e.toMapArgDartCode()).join('\n    ');
         const mapIs = this.cases.map((e) => e.toMapIsDartCode()).join('\n');
@@ -94,6 +126,8 @@ abstract class ${this.name} {
   ${factories}
   ${this.toWhenDartCode()}
   ${this.toMapDartCode()}
+  ${this.toMaybeWhenDartCode()}
+  ${this.toMaybeMapDartCode()}
   ${this.toFromStringDartCode()}
   ${this.toToStringDartCode()}
   }

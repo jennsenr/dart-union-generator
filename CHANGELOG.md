@@ -1,3 +1,6 @@
+## 0.0.6
+
+Added maybeMap and maybeWhen methods
 ## 0.0.5
 
 Added documentation.

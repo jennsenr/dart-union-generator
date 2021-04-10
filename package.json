@@ -1,7 +1,7 @@
 {
   "name": "dart-union-generator",
   "displayName": "Dart Union Class Generator",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Easily generate Union classes that implement the when and map methods",
   "repository": {
 		"type": "git",

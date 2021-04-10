@@ -32,7 +32,10 @@
     "extension",
     "generator",
     "sealed",
-    "failure"
+    "failure",
+    "enum",
+    "classes",
+    "class"
   ],
   "icon": "assets/icon.png",
   "author": "Jennsen Ramos",

@@ -48,14 +48,14 @@ export default class UnionCase {
 
     return dartCode;
   }
+  
+  toMaybeWhenArgDartCode(): string {
+    const dartCode = `void Function(${this.name})? ${this.factoryName},`
+
+    return dartCode;
+  }
 
   toWhenIsDartCode(): string {
-    const hasArgs = this.args.length > 0
-
-    if (hasArgs) {
-      return '';
-    }
-
     const dartCode = `
     if (this is ${this.name}) {
       ${this.factoryName}.call(this as ${this.name});
@@ -65,7 +65,23 @@ export default class UnionCase {
     return dartCode;
   }
 
+  toMaybeWhenIsDartCode(): string {
+    const dartCode = `
+    if (this is ${this.name} && ${this.factoryName} != null) {
+      ${this.factoryName}.call(this as ${this.name});
+    }
+`
+
+    return dartCode;
+  }
+
   toFromStringDartCode(className: string): string {
+    const hasArgs = this.args.length > 0
+
+    if (hasArgs) {
+      return '';
+    }
+
     const dartCode = `
     if (value == '${this.factoryName}') {
       return ${className}.${this.factoryName}();
@@ -88,10 +104,25 @@ export default class UnionCase {
 
     return dartCode;
   }
+
+  toMaybeMapArgDartCode(): string {
+    const dartCode = `R Function(${this.name})? ${this.factoryName},`
+
+    return dartCode;
+  }
   
   toMapIsDartCode(): string {
     const dartCode = `
     if (this is ${this.name}) {
+      return ${this.factoryName}.call(this as ${this.name});
+    }
+`
+    return dartCode;
+  }
+
+  toMaybeMapIsDartCode(): string {
+    const dartCode = `
+    if (this is ${this.name} && ${this.factoryName} != null) {
       return ${this.factoryName}.call(this as ${this.name});
     }
 `

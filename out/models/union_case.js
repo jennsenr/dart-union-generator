@@ -32,11 +32,11 @@ class UnionCase {
         const dartCode = `required void Function(${this.name}) ${this.factoryName},`;
         return dartCode;
     }
+    toMaybeWhenArgDartCode() {
+        const dartCode = `void Function(${this.name})? ${this.factoryName},`;
+        return dartCode;
+    }
     toWhenIsDartCode() {
-        const hasArgs = this.args.length > 0;
-        if (hasArgs) {
-            return '';
-        }
         const dartCode = `
     if (this is ${this.name}) {
       ${this.factoryName}.call(this as ${this.name});
@@ -44,7 +44,19 @@ class UnionCase {
 `;
         return dartCode;
     }
+    toMaybeWhenIsDartCode() {
+        const dartCode = `
+    if (this is ${this.name} && ${this.factoryName} != null) {
+      ${this.factoryName}.call(this as ${this.name});
+    }
+`;
+        return dartCode;
+    }
     toFromStringDartCode(className) {
+        const hasArgs = this.args.length > 0;
+        if (hasArgs) {
+            return '';
+        }
         const dartCode = `
     if (value == '${this.factoryName}') {
       return ${className}.${this.factoryName}();
@@ -64,9 +76,21 @@ class UnionCase {
         const dartCode = `required R Function(${this.name}) ${this.factoryName},`;
         return dartCode;
     }
+    toMaybeMapArgDartCode() {
+        const dartCode = `R Function(${this.name})? ${this.factoryName},`;
+        return dartCode;
+    }
     toMapIsDartCode() {
         const dartCode = `
     if (this is ${this.name}) {
+      return ${this.factoryName}.call(this as ${this.name});
+    }
+`;
+        return dartCode;
+    }
+    toMaybeMapIsDartCode() {
+        const dartCode = `
+    if (this is ${this.name} && ${this.factoryName} != null) {
       return ${this.factoryName}.call(this as ${this.name});
     }
 `;

@@ -58,7 +58,7 @@ export default class UnionCase {
   toWhenIsDartCode(): string {
     const dartCode = `
     if (this is ${this.name}) {
-      return ${this.factoryName}.call(this as ${this.name});
+      ${this.factoryName}.call(this as ${this.name});
     }
 `
 
@@ -68,7 +68,7 @@ export default class UnionCase {
   toMaybeWhenIsDartCode(): string {
     const dartCode = `
     if (this is ${this.name} && ${this.factoryName} != null) {
-      return ${this.factoryName}.call(this as ${this.name});
+      ${this.factoryName}.call(this as ${this.name});
     }
 `
 

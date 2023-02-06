@@ -64,11 +64,9 @@ export default class UnionCase {
   }
 
   toMaybeWhenIsDartCode(): string {
-    const dartCode = `
-    if (this is ${this.name} && ${this.factoryName} != null) {
+    const dartCode = `if (this is ${this.name} && ${this.factoryName} != null) {
       return ${this.factoryName}.call(this as ${this.name});
-    }
-`
+    }`
 
     return dartCode;
   }
@@ -80,20 +78,18 @@ export default class UnionCase {
       return '';
     }
 
-    const dartCode = `
-    if (value == '${this.factoryName}') {
+    const dartCode = `if (value == '${this.factoryName}') {
       return ${className}.${this.factoryName}();
-    }
-`
+    }`
+
     return dartCode;
   }
 
   toToStringDartCode(): string {
-    const dartCode = `
-    if (this is ${this.name}) {
+    const dartCode = `if (this is ${this.name}) {
       return '${this.factoryName}';
-    }
-`
+    }`
+
     return dartCode;
   }
 
@@ -110,20 +106,18 @@ export default class UnionCase {
   }
   
   toMapIsDartCode(): string {
-    const dartCode = `
-    if (this is ${this.name}) {
+    const dartCode = `if (this is ${this.name}) {
       return ${this.factoryName}.call(this as ${this.name});
-    }
-`
+    }`
+
     return dartCode;
   }
 
   toMaybeMapIsDartCode(): string {
-    const dartCode = `
-    if (this is ${this.name} && ${this.factoryName} != null) {
+    const dartCode = `if (this is ${this.name} && ${this.factoryName} != null) {
       return ${this.factoryName}.call(this as ${this.name});
-    }
-`
+    }`
+
     return dartCode;
   }
 

@@ -111,12 +111,12 @@ export default class Union {
   }
 
   toFromStringDartCode(): string {
-    const fromStringFactories = this.cases.filter((e) => e.args.length == 0).map((e) => e.toFromStringDartCode(this.name)).join('\n\n    ')
+    const fromStringFactoriesList = this.cases.filter((e) => e.args.length == 0).map((e) => e.toFromStringDartCode(this.name))
+    const fromStringFactories = fromStringFactoriesList.join('\n\n    ')
     const isDefault = `return ${this.name}.${this.cases[0].factoryName}();`
+    const body = fromStringFactoriesList.length > 0 ? `${fromStringFactories}\n\n    ${isDefault}` : isDefault
     const dartCode = `factory ${this.name}.fromString(String value) {
-    ${fromStringFactories}
-
-    ${isDefault}
+    ${body}
   }`
 
     return dartCode

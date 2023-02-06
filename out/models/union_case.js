@@ -90,14 +90,13 @@ class UnionCase {
             const dartCode = `class ${this.name} extends ${className} {}`;
             return dartCode;
         }
-        const properties = this.args.map((e) => e.toPropertyDartCode()).join('\n    ');
+        const properties = this.args.map((e) => e.toPropertyDartCode()).join('\n  ');
         const variables = this.args.map((e) => e.toThisVariableDartCode()).join(', ');
         const classConstructor = `${this.name}(${variables});`;
-        const dartCode = `
-class ${this.name} extends ${className} {
-    ${properties}
+        const dartCode = `class ${this.name} extends ${className} {
+  ${classConstructor}
 
-    ${classConstructor}
+  ${properties}
 }`;
         return dartCode;
     }

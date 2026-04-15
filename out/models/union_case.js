@@ -37,17 +37,15 @@ class UnionCase {
         return dartCode;
     }
     toWhenIsDartCode() {
-        const dartCode = `
-    if (this is ${this.name}) {
-      ${this.factoryName}.call(this as ${this.name});
-    }
-`;
+        const dartCode = `if (this is ${this.name}) {
+      return ${this.factoryName}.call(this as ${this.name});
+    }`;
         return dartCode;
     }
     toMaybeWhenIsDartCode() {
         const dartCode = `
     if (this is ${this.name} && ${this.factoryName} != null) {
-      ${this.factoryName}.call(this as ${this.name});
+      return ${this.factoryName}.call(this as ${this.name});
     }
 `;
         return dartCode;

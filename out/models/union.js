@@ -34,14 +34,12 @@ class Union {
     }
     toWhenDartCode() {
         const whenArgs = this.cases.map((e) => e.toWhenArgDartCode()).join('\n    ');
-        const whenIs = this.cases.map((e) => e.toWhenIsDartCode()).join('\n');
-        const isDefault = `${this.cases[0].factoryName}.call(this as ${this.cases[0].name});`;
+        const whenIs = this.cases.map((e) => e.toWhenIsDartCode()).join('\n\n    ');
         const dartCode = `
   void when({
     ${whenArgs}
   }) {
-${whenIs}
-    ${isDefault}
+    ${whenIs}
   }
 `;
         return dartCode;
